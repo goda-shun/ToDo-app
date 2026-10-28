@@ -26,18 +26,17 @@ body {
     box-sizing: border-box;
 }
 
-.container {
+table {
     background-color: #94c681;
-    display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin:0 auto;
-    width:500px;
+    width:700px;
 }
 
-.index-content {
-    display: flex;
+td {
+    width:30px;
 }
 
 .index-content-task-name {
@@ -70,7 +69,15 @@ body {
 }
 
 .complete-button {
-    
+    background-color: lightblue;
+}
+
+.edit-button {
+    background-color: lightgray;
+}
+
+.delete-button {
+    background-color: rgb(255, 0, 34);
 }
 
 .new-create-button {

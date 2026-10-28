@@ -1,3 +1,4 @@
+
 package com.example.demo;
 
 import org.springframework.context.annotation.Bean;
@@ -7,27 +8,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity 
+@EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http) throws Exception {
 
         http
             .authorizeHttpRequests(auth -> auth
-                // .requestMatchers("/login", "/css/**")
-                .anyRequest()
-                .permitAll()
-                // .authenticated()
+                .anyRequest().permitAll()
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/h2-console/**")
+            )
+            .headers(headers -> headers
+                .frameOptions(frame -> frame.sameOrigin())
             );
-            // .formLogin(form -> form
-            //     .loginPage("/login")
-            //     .defaultSuccessUrl("/User/index", true)
-            //     .permitAll()
-            // )
-            // .logout(logout -> logout
-            //     .logoutSuccessUrl("/login")
-            // );
 
         return http.build();
     }
 }
+
