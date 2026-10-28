@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoリストホーム画面</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <header>
+        <h1 class="header">
+            <div class="header-title">ToDo一覧</div>
+        </h1>
+    </header>
+    
+    <form th:action="@{/}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+    <div class="container">
+        <div class="index-content">
+            <div class="index-content-task-name">タスク名</div>
+            <div class="index-content-limit-date">期限</div>
+        </div>
+        <div class="index-content">
+            <button type="submit" class="complete-button">完了</button>
+            <div class="index-content-task-name">タスク1</div>
+            <div class="index-content-limit-date">期限</div>
+            <button type="submit">詳細</button>
+            <button type="submit">削除</button>
+        </div>
+        <div class="index-content">
+            <button type="submit" class="complete-button">完了</button>
+            <div class="index-content-task-name">タスク2</div>
+            <div class="index-content-limit-date">期限</div>
+            <button type="submit">詳細</button>
+            <button type="submit">削除</button>
+        </div>
+    </div>
+    <div class="button">
+        <button type="submit" class="new-create-button">ToDo<br>新規登録</button>
+        <button type="submit" class="complete-task-index-button">完了済み<br>ToDo一覧へ</button>
+    </div>
+</body>
+</html>
