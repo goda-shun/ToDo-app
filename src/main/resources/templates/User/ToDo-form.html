@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>ToDo新規登録画面</title>
-        <link rel="stylesheet" th:href="@{/css/form.css}">
-    </head>
-    <body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+</head>
+
+<body>
+    <div>
         <header>
             <h1 class="header">
-                <div class="header-title">ToDo新規登録画面</div>
+                <div class="header-title" th:text="${todo.id} != null ? 'ToDo詳細画面' : 'ToDo新規登録画面'">ToDo新規登録画面</div>
             </h1>
         </header>
-        
-        <form th:action="@{/new}" method="post">
+
+        <form th:action="${todo.id} != null ? @{/update/{id}(id=${todo.id})} : @{/create}" th:object="${todo}"
+            method="post">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <div class="container">
-            <div class="content">
-                <label class="content-title">タスク名</label>
-                <input type="text" class="task-name">
-            </div>
+            <div class="container">
+                <div class="content">
+                    <label class="content-title">タスク名</label>
+                    <input type="text" class="task-name" th:field="*{taskName}">
+                </div>
 
-            <div class="content">
-                <label class="content-title">期限</label>
-                <input type="date" class="limit-date">
-            </div>
+                <div class="content">
+                    <label class="content-title">期限</label>
+                    <input type="date" class="limit-date" th:field="*{limitDate}">
+                </div>
 
-            <div class="content">
-                <label for="password" class="content-title">詳細</label>
-                <textarea></textarea>
+                <div class="content">
+                    <label for="password" class="content-title">詳細</label>
+                    <textarea th:field="*{detail}"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="button">
-            <a th:href="@{/}">
-                <button class="create-button">登録</button>
-            </a>
-            <a th:href="@{/}" class="cancel-button">キャンセル</a>
-        </div>
+            <div class="button">
+                <button type="submit" class="create-button" th:text="${todo.id} != null ? '更新' : '登録'">登録</button>
+                <!-- <a th:href="@{/}" class="cancel-button">キャンセル</a> -->
+                <button type="button" class="cancel-button" onclick="location.href='/'"
+                    th:text="${todo.id} != null ? '戻る' : 'キャンセル'">キャンセル</button>
+            </div>
         </form>
-    </body>
+    </div>
+</body>
+
 </html>
